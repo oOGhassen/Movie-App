@@ -56,3 +56,11 @@ width: 100px;
 border: 0.5px solid black;
 padding: 0.5rem 1rem;
  }
+ul{
+  display:flex;
+  width: inherit;
+  max-width: inherit;
+  list-style: none;
+  justify-content: space-around;
+  background-color: gold;
+}

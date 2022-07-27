@@ -4,11 +4,15 @@ import AddNewMovie from './Components/AddNewMovie';
 import MovieList from './Components/MovieList';
 import SearchBar from './Components/SearchBar';
 import { moviesData } from './data';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Infos from './Components/Infos';
+
 
 function App() {
   const [movies, setMovies] = useState(moviesData);
   const [text, setText] = useState("");
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(5);
   const handleChange=(y)=>{
     setText(y)
   }
@@ -25,9 +29,18 @@ function App() {
   }
   return (
     <div className="App">
-      <SearchBar text={text} rating={rating} handleChange={handleChange} handleRating={handleRating}/>
-      <MovieList data={movies.filter(el=>el.title.toLocaleLowerCase().includes(text.toLocaleLowerCase())&&el.rating<=rating)} deleteMovie={handleDelete}/>
+      <Router>
       <AddNewMovie handleAdd={handleAdd}/>
+      <SearchBar text={text} rating={rating} handleChange={handleChange} handleRating={handleRating}/>
+        <Routes>
+          <Route path="/"element={
+
+      <MovieList data={movies.filter(el=>el.title.toLocaleLowerCase().includes(text.toLocaleLowerCase())&&el.rating<=rating)} deleteMovie={handleDelete}/>
+
+          }/>
+      <Route path="/infos/:id" element={<Infos data={movies}/>}/>
+      </Routes>
+      </Router>
     </div>
   );
 }
